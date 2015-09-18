@@ -1,0 +1,27 @@
+{
+  "name": "pc",
+  "version": "1.0.0",
+  "description": "woqu pc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jquery": "1.11.2",
+    "normalize.css": "^3.0.3"
+  },
+  "author": "Frend",
+  "license": "MIT",
+  "devDependencies": {
+    "colors": "^1.1.2",
+    "find": "^0.2.3",
+    "gulp": "^3.9.0",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-less": "^3.0.3",
+    "gulp-uglify": "^1.4.1",
+    "gulp-watch": "^4.3.5",
+    "less-plugin-autoprefix": "^1.4.2",
+    "less-plugin-clean-css": "^1.5.1",
+    "webpack": "^1.12.2"
+  }
+}
