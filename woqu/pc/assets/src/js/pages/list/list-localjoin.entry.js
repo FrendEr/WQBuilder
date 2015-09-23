@@ -21,15 +21,3 @@ ListCommon.listLog();
 
 // test pack list js
 PackList.packLog();
-
-// test slider plugin
-var Slider = require('../../plugins/jquery.slider.js');
-var bannerSlider = new Slider($('#bannerSlider'), {
-	time: 5000,
-	delay: 400,
-	event: 'hover',
-	auto: true,
-	mode: 'fade',
-	controller: $('#bannerCtrl'),
-	activeControllerCls: 'active'
-});
