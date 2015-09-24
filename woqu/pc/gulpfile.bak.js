@@ -56,77 +56,34 @@ var find = require('find');
 var uglify = require('gulp-uglify');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
-/*
- * keyword desction
- *
- * @channel  : 频道页
- * @list     : 列表页
- * @detail   : 详情页
- * @order    : 下单页
- * @pay      : 支付页
- * @album    : 专辑页
- * @activity : 活动页
- * @about    : 周边页
- *
- * 备注: 目前租车、酒店、欧铁业务线暂不考虑
- *
- */
-var keywordMap = ['index', 'list', 'detail'/*, 'channel', 'order', 'pay', 'album', 'activity', 'about'*/];
-
 gulp.task('script', function() {
-    // 适配不同的操作系统的路径规则
     var platform = process.platform,
         slash = /^win/.test(platform) ? '\\' : '/';
 
     find.file(/\.entry\.js$/, path.resolve(__dirname, './assets/src/'), function(files) {
-        var dirArr  = [],                  // 每个文件对应的目录，到/js一级                                                       
-            entry   = {},                  // 项目所有的入口文件
-            plugins = [],                  // chunks数组
-            keywordArrMap = {};            // 创建一个空的映射表，用来存储功能页面对应的文件目录数组
+        var len = files.length,
+            dirArr = [],
+            listdirArr = [],
+            detaildirArr = [],
+            entry = {};
 
-        for (var i = 0; i < keywordMap.length; i++) {
-            keywordArrMap[keywordMap[i]] = [];
-        }
-
-        for (var i = 0; i < files.length; i++) {                                                   
-            var file = files[i].replace(/\.js$/, ''),                                      
+        for (var i = 0; i < len; i++) {
+            var file = files[i].replace(/\.js$/, ''),
                 dir = file.split('js' + slash)[1];
 
             dirArr.push(dir);
             entry[dir] = file;
 
-            // 按照功能划分，每个功能关联的页面目录
-            for (var j = 0; j < keywordMap.length; j++) {
-                if (file.indexOf(keywordMap[j]) !== -1) {
-                    keywordArrMap[keywordMap[j]].push(dir);
-                }
+            if (file.indexOf('list') !== -1) {
+                listdirArr.push(dir);
+            }
+            if (file.indexOf('detail') !== -1) {
+                detaildirArr.push(dir);
             }
         }
 
-        // 按照功能划分，页面的基础脚本，例如：list.base.js、detail.base.js
-        for (var i = 0; i < keywordMap.length; i++) {
-            dirArr.push(keywordMap[i] + '.base');
-        }
-
-        // 初始化chunks数组
-        for (var i = 0; i < keywordMap.length; i++) {
-            var chunks = keywordArrMap[keywordMap[i]],
-                ccpObj = new CommonsChunkPlugin({
-                name: keywordMap[i] + '.base',
-                filename: 'pages/' + keywordMap[i] + '/' + keywordMap[i] + '.base.js',
-                chunks: chunks,
-                minChunks: chunks.length
-            });
-
-            plugins.push(ccpObj);
-        }
-        // 全站基础脚本，woqu.base.js
-        plugins.push(new CommonsChunkPlugin({
-            name: 'woqu.base',
-            filename: 'woqu.base.js',
-            chunks: dirArr,
-            minChunks: 2
-        }));
+        dirArr.push('list.base');
+        dirArr.push('detail.base');
 
         webpack({
             entry: entry,
@@ -134,7 +91,26 @@ gulp.task('script', function() {
                 path: path.join(__dirname, 'assets/dist/js'),
                 filename: '[name].js'
             },
-            plugins: plugins
+            plugins: [
+                new CommonsChunkPlugin({
+                    name: 'list.base',
+                    filename: 'pages/list/list.base.js',
+                    chunks: listdirArr,
+                    minChunks: listdirArr.length
+                }),
+                new CommonsChunkPlugin({
+                    name: 'detail.base',
+                    filename: 'pages/detail/detail.base.js',
+                    chunks: detaildirArr,
+                    minChunks: detaildirArr.length
+                }),
+                new CommonsChunkPlugin({
+                    name: 'woqu.base',
+                    filename: 'woqu.base.js',
+                    chunks: dirArr,
+                    minChunks: 2
+                })
+            ]
         }, function(err, stats) {
             if (err) console.log('webpack error!'.red);
         });
