@@ -57,24 +57,33 @@ var uglify = require('gulp-uglify');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 gulp.task('script', function() {
+    var platform = process.platform,
+        slash = (platform.indexOf('win') !== -1) ? '\\' : '/';
+
     find.file(/\.entry\.js$/, path.resolve(__dirname, './assets/src/'), function(files) {
         var len = files.length,
             dirArr = [],
             listdirArr = [],
+            detaildirArr = [],
             entry = {};
 
         for (var i = 0; i < len; i++) {
             var file = files[i].replace(/\.js$/, ''),
-                dir = file.split('js/')[1];
+                dir = file.split('js' + slash)[1];
 
             dirArr.push(dir);
-            dirArr.push('list.base');
             entry[dir] = file;
 
             if (file.indexOf('list') !== -1) {
                 listdirArr.push(dir);
             }
+            if (file.indexOf('detail') !== -1) {
+                detaildirArr.push(dir);
+            }
         }
+
+        dirArr.push('list.base');
+        dirArr.push('detail.base');
 
         webpack({
             entry: entry,
@@ -88,6 +97,12 @@ gulp.task('script', function() {
                     filename: 'pages/list/list.base.js',
                     chunks: listdirArr,
                     minChunks: listdirArr.length
+                }),
+                new CommonsChunkPlugin({
+                    name: 'detail.base',
+                    filename: 'pages/detail/detail.base.js',
+                    chunks: detaildirArr,
+                    minChunks: detaildirArr.length
                 }),
                 new CommonsChunkPlugin({
                     name: 'woqu.base',
@@ -134,21 +149,21 @@ gulp.task('watch', function() {
             case '.gif':
                 console.log('\nadd image!'.yellow);
                 gulp.start('image', function(err) {
-                    console.log('✔ image reloaded!\n'.green);
+                    console.log('√ image reloaded!\n'.green);
                 });
                 break;
             case '.css':
             case '.less':
                 console.log('\nadd style!'.yellow);
                 gulp.start('style', function(err) {
-                    console.log('✔ style reloaded!\n'.green);
+                    console.log('√ style reloaded!\n'.green);
                 });
                 break;
             case '.js':
             case '.coffee':
                 console.log('\nadd script!'.yellow);
                 gulp.start('script', function(err) {
-                    console.log('✔ script reloaded!\n'.green);
+                    console.log('√ script reloaded!\n'.green);
                 });
                 break;
             default:
@@ -167,21 +182,21 @@ gulp.task('watch', function() {
             case '.gif':
                 console.log('\nimage change!'.red);
                 gulp.start('image', function(err) {
-                    console.log('✔ image reloaded!\n'.green);
+                    console.log('√ image reloaded!\n'.green);
                 });
                 break;
             case '.css':
             case '.less':
                 console.log('\nstyle change!'.yellow);
                 gulp.start('style', function(err) {
-                    console.log('✔ style reloaded!\n'.green);
+                    console.log('√ style reloaded!\n'.green);
                 });
                 break;
             case '.js':
             case '.coffee':
                 console.log('\nscript change!'.yellow);
                 gulp.start('script', function(err) {
-                    console.log('✔ script reloaded!\n'.green);
+                    console.log('√ script reloaded!\n'.green);
                 });
                 break;
             default:
@@ -201,7 +216,7 @@ gulp.task('watch', function() {
                 console.log('\nunlink image!'.red);
                 fs.unlink(file.replace('src', 'dist'));
                 gulp.start('image', function(err) {
-                    console.log('✔ image reloaded!\n'.green);
+                    console.log('√ image reloaded!\n'.green);
                 });
                 break;
             case '.css':
@@ -209,7 +224,7 @@ gulp.task('watch', function() {
                 console.log('\nunlink style!'.red);
                 fs.unlink(file.replace('src', 'dist'));
                 gulp.start('style', function(err) {
-                    console.log('✔ style reloaded!\n'.green);
+                    console.log('√ style reloaded!\n'.green);
                 });
                 break;
             case '.js':
@@ -217,7 +232,7 @@ gulp.task('watch', function() {
                 console.log('\nunlink script!'.red);
                 fs.unlink(file.replace('src', 'dist'));
                 gulp.start('script', function(err) {
-                    console.log('✔ script reloaded!\n'.green);
+                    console.log('√ script reloaded!\n'.green);
                 });
                 break;
             default:
