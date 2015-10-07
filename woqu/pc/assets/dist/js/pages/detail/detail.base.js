@@ -1,15 +1,1 @@
-webpackJsonp([6,0,1],[
-/* 0 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// test jquery
-	var $ = __webpack_require__(1);
-	console.log($('p').length);
-
-	// test woqu common js
-	var WoquCommon = __webpack_require__(3);
-	WoquCommon.commonLog();
-
-
-/***/ }
-]);
+webpackJsonp([6,0,1],[function(n,o,e){var t=e(1);console.log(t("p").length);var i=e(3);i.commonLog()}]);

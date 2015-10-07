@@ -79,7 +79,7 @@ gulp.task('script', function() {
         slash = /^win/.test(platform) ? '\\' : '/';
 
     find.file(/\.entry\.js$/, path.resolve(__dirname, './assets/src/'), function(files) {
-        var dirArr  = [],                  // 每个文件对应的目录，到/js一级                                                       
+        var dirArr  = [],                  // 每个文件对应的目录，到/js一级
             entry   = {},                  // 项目所有的入口文件
             plugins = [],                  // chunks数组
             keywordArrMap = {};            // 创建一个空的映射表，用来存储功能页面对应的文件目录数组
@@ -88,8 +88,8 @@ gulp.task('script', function() {
             keywordArrMap[keywordMap[i]] = [];
         }
 
-        for (var i = 0; i < files.length; i++) {                                                   
-            var file = files[i].replace(/\.js$/, ''),                                      
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i].replace(/\.js$/, ''),
                 dir = file.split('js' + slash)[1];
 
             dirArr.push(dir);
@@ -110,10 +110,11 @@ gulp.task('script', function() {
 
         // 初始化chunks数组
         for (var i = 0; i < keywordMap.length; i++) {
-            var chunks = keywordArrMap[keywordMap[i]],
+            var keywordItem = keywordMap[i],
+                chunks = keywordArrMap[keywordItem],
                 ccpObj = new CommonsChunkPlugin({
-                name: keywordMap[i] + '.base',
-                filename: 'pages/' + keywordMap[i] + '/' + keywordMap[i] + '.base.js',
+                name: keywordItem + '.base',
+                filename: 'pages/' + keywordItem + '/' + keywordItem + '.base.js',
                 chunks: chunks,
                 minChunks: chunks.length
             });
@@ -127,6 +128,11 @@ gulp.task('script', function() {
             chunks: dirArr,
             minChunks: 2
         }));
+        // uglify script
+        plugins.push(new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            mangle: false       // 变量命名压缩，default false
+        }));
 
         webpack({
             entry: entry,
@@ -136,20 +142,37 @@ gulp.task('script', function() {
             },
             plugins: plugins
         }, function(err, stats) {
-            if (err) console.log('webpack error!'.red);
+            if (err) console.log('webpack script error!'.red);
         });
     }).error(function(err) {
         console.log('find js files error!'.red);
     });
 });
 
-gulp.task('script-uglify', function() {
-    return gulp.start('script', function(err) {
-        if (err) console.log('gulp script error!'.red);
-
-        return gulp.src('assets/dist/**/*.js')
-            .pipe(uglify())
-            .pipe(gulp.dest('assets/dist'));
+/*
+ * components modules
+ *
+ */
+// 备注：组件目前用于测试。由于版本号原因，目前不能在生产环境使用。
+gulp.task('components', function() {
+    webpack({
+        entry: {
+            'header/header.component': '/Users/frend/Documents/Frend/Github-Repo/FrendEr/woqu-builder/woqu/pc/assets/src/components/header/header.component',
+            'footer/footer.component': '/Users/frend/Documents/Frend/Github-Repo/FrendEr/woqu-builder/woqu/pc/assets/src/components/footer/footer.component'
+        },
+        output: {
+            path: path.join(__dirname, 'assets/dist/components'),
+            filename: '[name].js',
+            publicPath: '//quimg.com/pc/assets/dist/components/'
+        },
+        module: {
+            loaders: [
+                { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+                { test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=1024' }
+            ]
+        }
+    }, function(err, stats) {
+        if (err) console.log('webpack components error!'.red);
     });
 });
 
@@ -284,4 +307,4 @@ gulp.task('default', ['script', 'style', 'image', 'watch']);
  * @include: image
  *
  */
-gulp.task('prod', ['script-uglify', 'style', 'image']);
+gulp.task('prod', ['script', 'style', 'image']);
