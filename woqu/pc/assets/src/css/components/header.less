@@ -1,0 +1,329 @@
+/*
+ * header style
+ */
+
+@header-image-url: "//quimg.com/pc/assets/dist/img/components/header.png";
+
+.header {
+    font-size: 12px;
+    color: #5c5c5c;
+
+    .header-top {
+        background-color: #ebeef2;
+        border-bottom: 1px solid #dde0e4;
+        font-family: verdana;
+
+        .top-content {
+            width: 1200px;
+            margin: 0 auto;
+            height: 30px;
+            line-height: 30px;
+
+            .tencent-partner {
+                position: relative;
+                float: left;
+                padding-left: 24px;
+
+                i {
+                    position: absolute;
+                    left: 0;
+                    top: 7px;
+                    width: 15px;
+                    height: 16px;
+                    background: url(@header-image-url) no-repeat 0 -57px;
+                }
+            }
+
+            .header-top-op {
+                float: right;
+                font-family: verdana;
+                max-width: 550px;
+
+                > li {
+                    position: relative;
+                    float: right;
+                    height: 30px;
+                    line-height: 30px;
+                    padding: 0 20px;
+                    margin-left: 1px;
+
+                    &.qr-code-li {
+                        padding-left: 5px;
+                    }
+
+                    p {
+                        float: left;
+                        margin: 0 10px;
+                        font-size: 13px;
+                        color: #5c5c5c;
+
+                        a {
+                            color: #5c5c5c;
+                        }
+
+                        i {
+                            position: absolute;
+                            width: 8px;
+                            height: 4px;
+                            background: url(@header-image-url) no-repeat 0 -83px;
+                            top: 13px;
+                            right: 14px;
+                        }
+                    }
+
+                    &:hover p i {
+                        background-position: 0 -97px;
+                    }
+
+                    .divide-line {
+                        position: absolute;
+                        right: -1px;
+                        top: 7px;
+                        width: 1px;
+                        height: 16px;
+                        background-color: #bfbfbf;
+                    }
+
+                    .sub-list {
+                        display: none;
+                        position: absolute;
+                        z-index: 10000;
+                        left: -1px;
+                        top: 30px;
+                        background-color: #fff;
+                        width: 100%;
+                        padding: 6px 0;
+                        border: 1px solid #dde0e4;
+                        border-top: none;
+                        min-width: 100px;
+
+                        li {
+                            line-height: 24px;
+                            font-size: 12px;
+                            color: #848484;
+                            overflow: hidden;
+                            text-align: center;
+
+                            &:hover {
+                                color: #0aaa96;
+                            }
+
+                            &.on span {
+                                color: #f08300;
+                            }
+
+                            span {
+                                float: left;
+                                text-align: left;
+                                width: 60px;
+                                text-indent: 5px;
+                                cursor: pointer;
+                            }
+
+                            a {
+                                color: #848484;
+                            }
+
+                            &:hover a {
+                                color: #0aaa96;
+                            }
+
+                            .symbol {
+                                width: 30px;
+                                margin-left: 5px;
+                                text-align: right;
+                                text-indent: 0;
+                            }
+                        }
+                    }
+
+                    .qr-code {
+                        display: none;
+                        position: absolute;
+                        z-index: 100;
+                        top: 30px;
+                        left: 0;
+                        width: 140px;
+                        background-color: #fff;
+                        border: 1px solid #dde0e4;
+                        border-top: none;
+                        padding-bottom: 15px;
+
+                        p {
+                            float: none;
+                            margin: 10px 0;
+                            text-align: center;
+
+                            a {
+                                color: #0aaa96;
+                                cursor: text;
+                            }
+
+                            .has-link:hover {
+                                text-decoration: underline;
+                                cursor: pointer;
+                            }
+
+                        }
+
+                        span {
+                            display: block;
+                            text-align: center;
+                            font-size: 12px;
+                            color: #848484;
+                            line-height: 13px;
+                        }
+
+                        .wechat {
+                            display: block;
+                            margin: 0 auto;
+                            width: 90px;
+                            height: 90px;
+                            background: url(@header-image-url) no-repeat -91px -111px;
+                        }
+
+                        .app {
+                            display: block;
+                            margin: 0 auto;
+                            width: 90px;
+                            height: 90px;
+                            background: url(@header-image-url) no-repeat -0 -111px;
+                        }
+                    }
+
+                    &:hover .sub-list, &:hover .qr-code {
+                        display: block;
+                    }
+
+                    &:hover {
+                        background-color: #fff;
+                    }
+
+                    .currency-icon {
+                        position: absolute;
+                        width: 12px;
+                        height: 16px;
+                        background: url(@header-image-url) no-repeat -25px -57px;
+                        left: 13px;
+                        top: 7px;
+                    }
+
+                    .mycount-icon {
+                        position: absolute;
+                        width: 13px;
+                        height: 15px;
+                        background: url(@header-image-url) no-repeat -47px -57px;
+                        left: 13px;
+                        top: 8px;
+                    }
+
+                }
+            }
+        }
+    }
+
+    .header-bottom {
+        background-color: #fff;
+        height: 104px;
+
+        .bottom-content {
+            position: relative;
+            width: 1200px;
+            margin: 0 auto;
+
+            .header-logo {
+                position: absolute;
+                left: 0;
+                top: 28px;
+                width: 180px;
+                height: 47px;
+                background: url(@header-image-url) no-repeat;
+            }
+
+            .header-phone {
+                position: absolute;
+                right: 0px;
+                top: 34px;
+
+                &:hover .phone-group {
+                    display: block;
+                }
+
+                &:hover > div strong i {
+                    background-position: -18px -97px;
+                    top: -3px;
+                }
+
+                > div {
+                    font-size: 22px;
+                    color: #333;
+                    line-height: 24px;
+
+                    strong {
+                        position: relative;
+                        display: inline-block;
+                        *display: inline;
+                        *zoom: 1;
+                        font-size: 12px;
+                        color: #fff;
+                        background-color: #206d64;
+                        border-radius: 2px;
+                        padding: 1px 6px 1px 3px;
+                        line-height: 16px;
+                        margin-left: 4px;
+                        top: -4px;
+                        font-family: microsoft yahei, verdana;
+
+                        i {
+                            display: inline-block;
+                            *display: inline;
+                            *zoom: 1;
+                            width: 10px;
+                            height: 5px;
+                            background: url(@header-image-url) no-repeat -18px -83px;
+                            position: relative;
+                            top: -2px;
+                            left: 2px;
+                        }
+                    }
+
+                    .phone-group {
+                        display: none;
+                        position: absolute;
+                        z-index: 1000;
+                        background-color: #fff;
+                        border-left: 1px solid #e8e8e8;
+                        box-shadow: 1px 1px 2px #888;
+                        right: 0;
+                        top: 25px;
+                        width: 244px;
+                        overflow: hidden;
+                        border-bottom: 1px solid #d9d9d9;
+                        padding: 10px 0;
+
+                        p {
+                            color: #333;
+                            font-size: 12px;
+                            overflow: hidden;
+
+                            span {
+                                float: left;
+                                width: 118px;
+                                padding: 0 2px;
+                            }
+
+                            .label {
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+
+                > span {
+                    font-size: 14px;
+                    color: #848484;
+                }
+            }
+        }
+    }
+}

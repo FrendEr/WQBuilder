@@ -1,1 +1,57 @@
-webpackJsonp([3,0,1],[function(n,e,o){var t={version:"v0.6.0",defenders:"Frend",packLog:function(){console.log("pack list js")}},i=o(1);console.log(i("p").length);var c=o(3);c.commonLog();var l=o(4);l.listLog(),t.packLog();var r=o(5);new r(i("#bannerSlider"),{time:5e3,delay:400,event:"hover",auto:!0,mode:"fade",controller:i("#bannerCtrl"),activeControllerCls:"active"});o(6)()},,,,,function(n,e){var o=function(n,e){"use strict";function o(){var n=h.children();t(),"hover"==g?n.mouseover(function(){r();var n=$(this).index();l(n,e.mode)}).mouseout(function(){p&&i()}):n.click(function(){r();var n=$(this).index();l(n,e.mode),p&&i()}),p&&i()}function t(){var o=n.children().first();"slide"==e.mode?o.width(L):o.children().css({position:"absolute",left:0,top:0}).first().siblings().hide()}function i(){f=setInterval(function(){c(d)},e.time)}function c(n){var o;o=n==b-1?0:n+1,l(o,e.mode)}function l(n,o){m.stop(!0,!0),k.stop(!0,!0),"slide"==o?function(){if(n>d)m.animate({left:"-="+Math.abs(n-d)*x+"px"},v);else{if(!(d>n))return;m.animate({left:"+="+Math.abs(n-d)*x+"px"},v)}}():function(){m.children(":visible").index()!=n&&m.children().fadeOut(v).eq(n).fadeIn(v)}();try{h.children("."+u).removeClass(u),h.children().eq(n).addClass(u)}catch(t){}d=n,e.exchangeEnd&&"function"==typeof e.exchangeEnd&&e.exchangeEnd.call(this,d)}function r(){clearInterval(f)}function a(){r(),c(0==d?b-2:d-2),p&&i()}function s(){r(),c(d==b-1?-1:d),p&&i()}if(n){var f,e=e||{},d=0,u=e.activeControllerCls,v=e.delay,p=e.auto,h=e.controller,g=e.event,m=n.children().first(),k=m.children(),b=k.length,x=n.width(),L=x*k.length;return o(),{prev:function(){a()},next:function(){s()}}}};n.exports=o},function(n,e){n.exports=function(){console.log("pack list special!")}}]);
+webpackJsonp([4,1,13,16],[
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PackList = {
+	    version: 'v0.6.0',
+	    defenders: 'Frend',
+
+	    packLog: function() {
+	        console.log('pack list js');
+	    }
+	};
+
+	// test jquery
+	var $ = __webpack_require__(1);
+	console.log($('p').length);
+
+	// test woqu common js
+	var WoquCommon = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../common/woqu.common.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	WoquCommon.commonLog();
+
+	// test list common js
+	var ListCommon = __webpack_require__(3);
+	ListCommon.listLog();
+
+	// test pack list js
+	PackList.packLog();
+
+	// test slider plugin
+	var Slider = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../plugins/jquery.slider.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var bannerSlider = new Slider($('#bannerSlider'), {
+		time: 5000,
+		delay: 400,
+		event: 'hover',
+		auto: true,
+		mode: 'fade',
+		controller: $('#bannerCtrl'),
+		activeControllerCls: 'active'
+	});
+
+	__webpack_require__(4)();
+
+
+/***/ },
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = function() {
+	    console.log('pack list special!');
+	};
+
+
+/***/ }
+]);

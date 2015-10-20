@@ -1,0 +1,134 @@
+/*
+ * my coupons and redpack
+ */
+
+.coupons-redpack-section {
+    .coupons-redpack-top {
+
+        .redpack-top-wrapper {
+            background-color: #0aaa96;
+            width: 940px;
+            height: 90px;
+            color: #fff;
+            padding: 15px 20px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        .coupons-top-wrapper {
+            position: relative;
+            padding: 35px 0 0 20px;
+            font-size: 14px;
+
+            input {
+                float: left;
+                width: 300px;
+                height: 38px;
+                border: 1px solid #f1f1f1;
+                text-indent: 20px;
+            }
+
+            button {
+                float: left;
+                width: 140px;
+                height: 40px;
+                margin-left: 20px;
+                font-size: 18px;
+            }
+
+            .active-coupons-error {
+                display: none;
+                position: absolute;
+                color: #eb615e;
+                font-size: 14px;
+                left: 22px;
+                bottom: -25px;
+                padding-left: 20px;
+
+                i {
+                    position: absolute;
+                    top: 2px;
+                    left: 0;
+                    width: 16px;
+                    height: 16px;
+                    background: url(//quimg.com/pc/assets/dist/img/pages/vip/vip-center.png) -144px -50px no-repeat;
+                }
+            }
+        }
+
+        .redpack-img {
+            float: left;
+            width: 118px;
+            text-align: center;
+            height: 100%;
+
+            img {
+                margin-top: 20px;
+            }
+        }
+
+        .coupons-redpack-info {
+            float: right;
+            width: 814px;
+            line-height: 44px;
+
+            .top-info {
+                border-bottom: 1px solid #149d8c;
+                overflow: hidden;
+
+                .redpack-money {
+                    float: left;
+
+                    span {
+                        color: #ffd906;
+                    }
+                }
+            }
+
+            .bottom-info {
+                span {
+                    position: relative;
+                    margin-right: 34px;
+                }
+            }
+        }
+    }
+
+    .coupons-redpack-bottom {
+        padding-top: 40px;
+        background-color: #fff;
+    }
+}
+
+.coupons-redpack-table {
+    table-layout: fixed;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+
+    .table-header {
+        font-weight: 700;
+        background-color: #f0f0f0;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    td {
+        height: 45px;
+        border-bottom: 1px dashed #f1f1f1;
+    }
+
+    tr:last-child {
+        td {
+            border-bottom: none;
+        }
+    }
+
+    .check-coupons {
+        color: #00aa96;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,1 +1,31 @@
-webpackJsonp([2,0,1],[function(o,n,c){var e={version:"v0.6.0",defenders:"Frend",packLog:function(){console.log("pack list js")}},p=c(1);console.log(p("p").length);var s=c(3);s.commonLog();var a=c(4);a.listLog(),e.packLog()}]);
+webpackJsonp([3,1,13,16],[
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PackList = {
+	    version: 'v0.6.0',
+	    defenders: 'Frend',
+
+	    packLog: function() {
+	        console.log('pack list js');
+	    }
+	};
+
+	// test jquery
+	var $ = __webpack_require__(1);
+	console.log($('p').length);
+
+	// test woqu common js
+	var WoquCommon = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../common/woqu.common.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	WoquCommon.commonLog();
+
+	// test list common js
+	var ListCommon = __webpack_require__(3);
+	ListCommon.listLog();
+
+	// test pack list js
+	PackList.packLog();
+
+
+/***/ }
+]);

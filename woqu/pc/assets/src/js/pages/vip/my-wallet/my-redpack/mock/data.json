@@ -1,0 +1,32 @@
+{
+    "rs": 1,
+    "msg": null,
+    "code": null,
+    "data": [
+        {
+            "amount": "￥200",
+            "sourceDescription": "红包",
+            "createTime": "2015-09-28 17:50:22"
+        },
+        {
+            "amount": "￥200",
+            "sourceDescription": "红包",
+            "createTime": "2015-09-28 17:50:22"
+        },
+        {
+            "amount": "￥200",
+            "sourceDescription": "红包",
+            "createTime": "2015-09-28 17:50:22"
+        },
+        {
+            "amount": "￥200",
+            "sourceDescription": "红包",
+            "createTime": "2015-09-28 17:50:22"
+        },
+        {
+            "amount": "￥200",
+            "sourceDescription": "红包",
+            "createTime": "2015-09-28 17:50:22"
+        }
+    ]
+}

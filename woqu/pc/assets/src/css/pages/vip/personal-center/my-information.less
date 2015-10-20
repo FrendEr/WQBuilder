@@ -1,0 +1,173 @@
+@vip-center-image-url: "//quimg.com/pc/assets/dist/img/pages/vip/vip-center.png";
+
+.information-section {
+    > div {
+        padding: 10px 75px 25px 35px;
+        background-color: #fff;
+    }
+
+    .info-group {
+        h2 {
+            position: relative;
+            font-size: 16px;
+            font-weight: normal;
+            color: #333;
+            margin: 20px 0;
+
+            i {
+                float: right;
+                width: 795px;
+                border-top: 1px solid #f1f1f1;
+                margin-top: 11px;
+            }
+
+            .edit-base-info {
+                position: absolute;
+                top: -6px;
+                right: -44px;
+                font-size: 14px;
+                color: #848484;
+                background-color: #f7f7f7;
+                border: 1px solid #f1f1f1;
+                height: 28px;
+                line-height: 28px;
+                border-radius: 14px;
+                width: 58px;
+                text-align: center;
+            }
+        }
+
+        table {
+            table-layout: fixed;
+            font-size: 14px;
+            color: #aeaeae;
+            line-height: 26px;
+
+            .btn {
+                margin-right: 31px;
+            }
+
+            td {
+                padding: 8px 0;
+
+                &:first-child {
+                    color: #848484;
+                    width: 70px;
+                    padding-right: 30px;
+                    text-align: right;
+                    vertical-align: top;
+                }
+            }
+
+            .company-feature p {
+                padding-left: 17px;
+                text-indent: -17px;
+            }
+
+            &.base-info {
+                input[type="text"] {
+                    border: 1px solid #cfdfdf;
+                    height: 26px;
+                    text-indent: 5px;
+                    color: #333;
+                }
+
+                input[type="radio"] {
+                    vertical-align: middle;
+                    margin-right: 10px;
+                }
+
+                .radio-label {
+                    display: inline-block;
+                    *display: inline;
+                    *zoom: 1;
+                    width: 45px;
+                }
+
+                .date-input {
+                    background: url(@vip-center-image-url) 130px -221px no-repeat;
+                }
+            }
+
+            &.security-info {
+                a {
+                    color: #0aaa96;
+                }
+            }
+
+            .has-confirm {
+                text-align: center!important;
+
+                i {
+                    display: block;
+                    width: 24px;
+                    height: 18px;
+                    margin: 0 auto;
+                    background: url(@vip-center-image-url) no-repeat -80px -50px;
+                }
+            }
+
+            .not-confirm {
+                text-align: center!important;
+
+                i {
+                    display: block;
+                    width: 20px;
+                    height: 19px;
+                    margin: 0 auto;
+                    background: url(@vip-center-image-url) no-repeat -114px -50px;
+                }
+            }
+
+            &.password-edit {
+                input[type="password"] {
+                    border: 1px solid #cfdfdf;
+                    height: 26px;
+                    width: 332px;
+                    text-indent: 5px;
+                    color: #333;
+                }
+            }
+
+            &.phone-verify, &.email-verify {
+                input[type="text"] {
+                    border: 1px solid #cfdfdf;
+                    height: 26px;
+                    width: 108px;
+                    text-indent: 5px;
+                    color: #333;
+                    margin-right: 5px;
+                }
+
+                select {
+                    border: 1px solid #cfdfdf;
+                    height: 28px;
+                    width: 110px;
+                }
+
+                .vc-btn {
+                    margin-right: 0;
+                }
+            }
+
+            .input-label {
+                color: #333;
+            }
+
+            .error-tips {
+                position: relative;
+                padding-left: 20px;
+                color: #eb615e;
+
+                i {
+                    position: absolute;
+                    top: 2px;
+                    left: 0;
+                    width: 16px;
+                    height: 16px;
+                    background: url(@vip-center-image-url) no-repeat -144px -50px;
+                }
+            }
+        }
+    }
+}

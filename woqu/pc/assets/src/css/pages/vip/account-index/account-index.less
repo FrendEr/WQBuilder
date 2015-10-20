@@ -1,0 +1,198 @@
+/*
+ * account index page
+ */
+
+@vip-center-image-url: "//quimg.com/pc/assets/dist/img/pages/vip/vip-center.png";
+
+.account-section {
+    background-color: #0aaa96!important;
+    width: 940px;
+    height: 90px;
+    overflow: hidden;
+    padding: 15px 20px;
+    font-size: 14px;
+    color: #fff;
+
+    .avatar {
+        float: left;
+        width: 118px;
+        text-align: center;
+        height: 100%;
+    }
+
+    .user-info {
+        float: right;
+        width: 814px;
+        line-height: 44px;
+
+        .top-info {
+            border-bottom: 1px solid #149d8c;
+            overflow: hidden;
+
+            .user-name {
+                float: left;
+            }
+
+            .user-account {
+                float: right;
+
+                .account-name {
+                    margin-right: 20px;
+                }
+
+                .edit-user-info {
+                    margin-left: 20px;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .bottom-info {
+            span {
+                position: relative;
+                padding-left: 30px;
+
+                i {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 20px;
+                    height: 18px;
+                    background: url(@vip-center-image-url) no-repeat;
+                }
+
+                &.user-email {
+                    margin-right: 20px;
+
+                    i {
+                        background-position: 0 -47px;
+                    }
+                }
+
+                &.user-phone {
+                    margin-left: 20px;
+
+                    i {
+                        background-position: -25px -50px;
+                        top: 1px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.common-section-title {
+    position: relative;
+    font-size: 16px;
+    color: #333;
+    font-weight: normal;
+    height: 20px;
+    border-left: 2px solid #0aaa96;
+    text-indent: 6px;
+
+    .check-all-gv {
+        font-size: 14px;
+        color: #0aaa96;
+        margin-left: 20px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.addons-section {
+    padding: 10px 20px;
+    overflow: hidden;
+
+    > div {
+        float: left;
+        width: 450px;
+        padding: 10px 0 30px 0;
+
+        &.general-visitors {
+            width: 469px;
+            border-right: 1px dashed #f1f1f1;
+
+            .gv-table {
+                font-size: 14px;
+                color: #848484;
+                padding-left: 8px;
+
+                table {
+                    margin: 12px 0;
+                    line-height: 32px;
+                }
+
+                .gv-phone {
+                    color: #aeaeae;
+                    padding-left: 43px;
+                }
+
+                .add-gv-btn {
+                    display: block;
+                    font-size: 14px;
+                    color: #0aaa96;
+                    border: 1px solid #0aaa96;
+                    border-radius: 2px;
+                    width: 198px;
+                    height: 26px;
+                    line-height: 26px;
+                    text-align: center;
+                }
+            }
+        }
+
+        &.coupons-redpack {
+            padding-left: 20px;
+
+            .cr-table {
+                font-size: 14px;
+                color: #848484;
+                padding-left: 8px;
+
+                table {
+                    margin: 12px 0;
+                    line-height: 32px;
+                }
+
+                .cr-value {
+                    color: #aeaeae;
+                    padding-left: 100px;
+
+                    &.value-not-empty {
+                        a {
+                            color: #0aaa96;
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .section-title {
+            .common-section-title;
+        }
+    }
+}
+
+.order-section {
+    .section-title {
+        .common-section-title;
+        margin-bottom: 20px;
+    }
+
+    .check-all-order {
+        color: #0aaa96;
+        position: absolute;
+        right: 0;
+        font-size: 14px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

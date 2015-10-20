@@ -1,0 +1,123 @@
+/*
+ * my comment
+ */
+
+@vip-center-image-url: "//quimg.com/pc/assets/dist/img/pages/vip/vip-center.png";
+
+.comment-table {
+    table-layout: fixed;
+    font-size: 14px;
+    color: #848484;
+
+    .comment-divide {
+        height: 20px;
+        background-color: #fcfcfc;
+        border-top: 1px solid #f1f1f1;
+        border-bottom: 1px solid #f1f1f1;
+
+        &:first-child {
+            background-color: transparent;
+            border-top: none;
+        }
+    }
+
+    .title-tr {
+        height: 40px;
+
+        td {
+            border-bottom: 1px dashed #f1f1f1;
+        }
+
+        .product-title {
+            float: left;
+            color: #00aa96;
+            padding-left: 20px;
+            width: 777px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .trip-date {
+            float: right;
+            padding-right: 20px;
+            color: #aeaeae;
+        }
+    }
+
+    .comment-tr {
+        .comment-info {
+            padding: 20px;
+            border-right: 1px dashed #f1f1f1;
+
+            .score-star {
+                padding-bottom: 12px;
+
+                .star {
+                    display: inline-block;
+                    *display: inline;
+                    *zoom: 1;
+                    width: 75px;
+                    height: 11px;
+                    margin: 0 20px 0 4px;
+                    background: url(@vip-center-image-url) no-repeat 0 -99px;
+
+                    i {
+                        display: block;
+                        height: 100%;
+                        width: 100%;
+                        background: url(@vip-center-image-url) no-repeat 0 -78px;
+                    }
+
+                    &.star0 i {
+                        width: 0;
+                    }
+
+                    &.star1 i {
+                        width: 15px;
+                    }
+
+                    &.star2 i {
+                        width: 30px;
+                    }
+
+                    &.star3 i {
+                        width: 45px;
+                    }
+
+                    &.star4 i {
+                        width: 60px;
+                    }
+
+                    &.star5 i {
+                        width: 75px;
+                    }
+                }
+            }
+
+            .comment-content {
+                color: #333;
+                line-height: 24px;
+            }
+
+            .comment-time {
+                padding-top: 20px;
+                color: #aeaeae;
+            }
+        }
+
+        .comment-coupons {
+            display: block;
+            margin: 0 auto;
+            width: 133px;
+            height: 60px;
+            line-height: 30px;
+            text-align: center;
+            background: url(@vip-center-image-url) no-repeat 0 -120px;
+
+            span {
+                color: #f08300;
+            }
+        }
+    }
+}

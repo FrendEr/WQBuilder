@@ -1,0 +1,197 @@
+/*
+ * vip center
+ */
+
+@vip-center-image-url: "//quimg.com/pc/assets/dist/img/pages/vip/vip-center.png";
+
+/*
+ * left layout style
+ */
+.vip-main {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0 50px 0;
+
+    .vip-left {
+        float: left;
+        width: 200px;
+        background-color: #fff;
+        border-top: 4px solid #1e6e64;
+
+        .left-item {
+            position: relative;
+            border-top: 1px solid #f1f1f1;
+            min-height: 58px;
+            line-height: 58px;
+            font-size: 16px;
+            color: #333;
+            text-indent: 72px;
+
+            &:first-child {
+                border-top: none;
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: #f6f6f6;
+            }
+
+            &.has-sub-item em {
+                position: absolute;
+                width: 9px;
+                height: 6px;
+                top: 28px;
+                right: 35px;
+                background: url(@vip-center-image-url) no-repeat 0 -34px;
+            }
+
+            &.has-sub-item:hover {
+                cursor: default;
+                background-color: #fff;
+            }
+
+            &.on {
+                border-left: 2px solid #0aaa96;
+                text-indent: 70px;
+                background-color: #f6f6f6;
+
+                i {
+                    left: 28px;
+                }
+            }
+
+            i {
+                position: absolute;
+                left: 30px;
+                top: 17px;
+                width: 24px;
+                height: 24px;
+                background: url(@vip-center-image-url) no-repeat;
+
+                &.account-index {
+                    background-position: 0 0;
+                }
+
+                &.my-order {
+                    background-position: -32px 0;
+                }
+
+                &.personal-center {
+                    background-position: -64px 0;
+                }
+
+                &.my-wallet {
+                    background-position: -98px 0;
+                }
+            }
+        }
+
+        .sub-list {
+            padding-left: 6px;
+            border-top: 1px solid #f1f1f1;
+
+            li {
+                font-size: 14px;
+                line-height: 40px;
+                height: 40px;
+                text-indent: 68px;
+                border-bottom: 1px solid #f1f1f1;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: #f6f6f6;
+                }
+
+                &.on {
+                    border-left: 2px solid #0aaa96;
+                    text-indent: 72px;
+                    background-color: #f6f6f6;
+                    margin-left: -6px;
+                }
+            }
+        }
+    }
+
+    .vip-right {
+        float: right;
+        width: 980px;
+    }
+}
+
+/*
+ * right layout style
+ */
+.section-warpper {
+    margin-bottom: 20px;
+
+    .section {
+        background-color: #fff;
+
+        .padding-wrapper {
+            padding: 20px 20px 0;
+        }
+    }
+
+    /* tag style */
+    .switch-tags {
+        position: relative;
+        font-size: 16px;
+        color: #848484;
+        height: 60px;
+        background-color: #f6f6f6;
+        border-bottom: 1px solid #f1f1f1;
+
+        span {
+            float: left;
+            padding: 0 30px;
+            text-align: center;
+            height: 59px;
+            line-height: 59px;
+            border-top: 2px solid #f6f6f6;
+            cursor: pointer;
+
+            &.on {
+                border-top-color: #00aa96;
+                color: #00aa96;
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+.checking-tips, .empty-tips {
+    text-align: center;
+    font-size: 18px;
+    color: #c7c7c7;
+    height: 240px;
+    line-height: 240px;
+}
+
+/*
+ * my order
+ */
+@import "./my-order/my-order.less";
+
+/*
+ * account index
+ */
+@import "./account-index/account-index.less";
+
+/*
+ * my coupons redpack
+ */
+@import "./my-wallet/coupons-redpack.less";
+
+/*
+ * personal center
+ */
+@import "./personal-center/personal-center.less";
+
+/*
+ * simple pagination
+ */
+@import "../../plugins/jquery.simplepagination.less";

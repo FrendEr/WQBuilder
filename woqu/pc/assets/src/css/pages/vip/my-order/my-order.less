@@ -1,0 +1,116 @@
+/*
+ * my order
+ */
+
+@vip-center-image-url: "//quimg.com/pc/assets/dist/img/pages/vip/vip-center.png";
+
+.hover-order-status {
+    position: relative;
+    color: #f08300;
+    float: right;
+    font-size: 14px;
+    line-height: 59px;
+    margin-right: 20px;
+    padding-left: 24px;
+
+    i {
+        position: absolute;
+        top: 21px;
+        left: 0;
+        width: 18px;
+        height: 18px;
+        background: url(@vip-center-image-url) no-repeat -52px -50px;
+    }
+}
+
+.order-table {
+    table-layout: fixed;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+
+    .table-header {
+        font-weight: bold;
+        background-color: #f0f0f0;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .order-divide {
+        height: 20px;
+        background-color: #fcfcfc;
+
+        &.first {
+            background-color: transparent;
+        }
+    }
+
+    .order-num-date {
+        height: 40px;
+        line-height: 40px;
+        text-align: left;
+        border-top: 1px solid #f1f1f1;
+        border-bottom: 1px dashed #f1f1f1;
+        color: #aeaeae;
+
+        span {
+            margin-right: 20px;
+        }
+
+        font {
+            color: #0aaa96;
+        }
+    }
+
+    .order-info {
+        td {
+            border-right: 1px dashed #f1f1f1;
+            border-bottom: 1px solid #f1f1f1;
+            height: 119px;
+            line-height: 30px;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        .order-title {
+            text-align: left;
+
+            a {
+                color: #333;
+
+                &:hover {
+                    color: #0aaa96;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .price, .check-detail {
+            color: #f08300;
+        }
+
+        .check-detail:hover {
+            text-decoration: underline;
+        }
+
+        .order-status, .cancel-order {
+            color: #848484;
+        }
+
+        .cancel-order:hover {
+            color: #f08300;
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+    }
+
+    tr td:last-child {
+        line-height: 14px;
+    }
+}

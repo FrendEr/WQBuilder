@@ -1,0 +1,30 @@
+{{? it.length === 0 }}
+<p class="empty-tips">您目前还没有优惠券哦~</p>
+{{?}}
+
+<table class="coupons-redpack-table">
+    <col width="170px"></col>
+    <col width="170px"></col>
+    <col width="170px"></col>
+    <col width="170px"></col>
+    <col width="170px"></col>
+    <col width="90px"></col>
+    <tr class="table-header">
+        <th>编号</th>
+        <th>面值</th>
+        <th>使用范围</th>
+        <th>生效时间</th>
+        <th>到期时间</th>
+        <th>优惠说明</th>
+    </tr>
+    {{~it :value:index}}
+        <tr>
+            <td>{{=value.couponCode}}</td>
+            <td>{{=value.currency}}{{=value.amount}}</td>
+            <td>{{=value.activeRange}}</td>
+            <td>{{=value.effTime}}</td>
+            <td>{{=value.expTime}}</td>
+            <td><a class="check-coupons" href="">查看</a></td>
+        </tr>
+    {{~}}
+</table>

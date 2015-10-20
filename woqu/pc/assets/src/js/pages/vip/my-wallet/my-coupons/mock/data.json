@@ -1,0 +1,55 @@
+{
+    "rs": 1,
+    "msg": null,
+    "code": null,
+    "data": [
+        {
+            "couponCode": "WNCZ45006",
+            "currency": "￥",
+            "amount": 3000,
+            "effTime": "2015-07-08",
+            "expTime": "2015-07-08",
+            "activeDescription": " 活动描述",
+            "activeRange": "打包",
+            "discountType": "优惠方式",
+            "orderCd": "已使用的订单号",
+            "canOverlap": "能否叠加"
+        },
+        {
+            "couponCode": "WNCZ45006",
+            "currency": "￥",
+            "amount": 3000,
+            "effTime": "2015-07-08",
+            "expTime": "2015-07-08",
+            "activeDescription": " 活动描述",
+            "activeRange": "打包",
+            "discountType": "优惠方式",
+            "orderCd": "已使用的订单号",
+            "canOverlap": "能否叠加"
+        },
+        {
+            "couponCode": "WNCZ45006",
+            "currency": "￥",
+            "amount": 3000,
+            "effTime": "2015-07-08",
+            "expTime": "2015-07-08",
+            "activeDescription": " 活动描述",
+            "activeRange": "打包",
+            "discountType": "优惠方式",
+            "orderCd": "已使用的订单号",
+            "canOverlap": "能否叠加"
+        },
+        {
+            "couponCode": "WNCZ45006",
+            "currency": "￥",
+            "amount": 3000,
+            "effTime": "2015-07-08",
+            "expTime": "2015-07-08",
+            "activeDescription": " 活动描述",
+            "activeRange": "打包",
+            "discountType": "优惠方式",
+            "orderCd": "已使用的订单号",
+            "canOverlap": "能否叠加"
+        }
+    ]
+}

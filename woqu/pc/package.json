@@ -7,27 +7,28 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "dot": "^1.0.3",
+    "html5shiv": "^3.7.3",
     "jquery": "1.11.2",
+    "lodash": "^3.10.1",
     "normalize.css": "^3.0.3"
   },
   "author": "Frend",
   "license": "MIT",
   "devDependencies": {
     "colors": "^1.1.2",
-    "css-loader": "^0.19.0",
-    "file-loader": "^0.8.4",
+    "del": "^2.0.2",
     "find": "^0.2.3",
     "gulp": "^3.9.0",
     "gulp-imagemin": "^2.3.0",
+    "gulp-jshint": "^1.11.2",
     "gulp-less": "^3.0.3",
     "gulp-uglify": "^1.4.1",
     "gulp-watch": "^4.3.5",
-    "less": "^2.5.1",
-    "less-loader": "^2.2.1",
+    "html-loader": "^0.3.0",
     "less-plugin-autoprefix": "^1.4.2",
     "less-plugin-clean-css": "^1.5.1",
-    "style-loader": "^0.12.4",
-    "url-loader": "^0.5.6",
+    "map-stream": "0.0.6",
     "webpack": "^1.12.2"
   }
 }

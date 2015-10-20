@@ -1,0 +1,39 @@
+{{? it.length === 0 }}
+<p class="empty-tips">暂无订单信息</p>
+{{?}}
+
+{{? it.length !== 0 }}
+
+<table class="collect-table">
+    <col width="300px"></col>
+    <col width="375px"></col>
+    <col width="190px"></col>
+    <col width="140px"></col>
+    {{~it:value:index}}
+        <tr class="collect-divide">
+            <td colspan="4"></td>
+        </tr>
+        <tr class="collect-tr">
+            <td class="collect-img">
+                <div>
+                    <span><span>{{=value.productCategory}}</span><i></i></span>
+                    <img src="//www.quimg.com/guide/origin/road1inusa_300180_20150901121210300.jpg" width="250" height="150">
+                </div>
+            </td>
+            <td class="collect-title">
+                <div>
+                    <a href="#">{{=value.title}}</a>
+                    <span class="collect-time">收藏于{{=value.createDate}}</span>
+                </div>
+            </td>
+            <td class="collect-price">
+                <span>{{=value.currency}}{{=value.price}}/人起</span>
+            </td>
+            <td>
+                <button class="btn btn-confirm btn-w80 btn-h24" type="button">立即预订</button>
+                <span class="collect-delete">删除</span>
+            </td>
+        </tr>
+    {{~}}
+</table>
+{{?}}

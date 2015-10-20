@@ -49,11 +49,46 @@ gulp.task('image', function() {
  *
  * @include: webpack
  * @include: uglify(prod)
+ * @include: clean['standalone']
+ * @include: copy['standalone']
+ * @include: jshint
  *
  */
+
+/*
+ * 打包脚本前要确保所有指定目录下地脚本通过验证
+ */
+var jshint = require('gulp-jshint');
+var map = require('map-stream');
+gulp.task('jshint', function() {
+    var jshintReporter = map(function (file, cb) {
+        if (!file.jshint.success) {
+            console.log('jshint error message: '.red + 'script fail in ' + file.path);
+        }
+        cb(null, file);
+    });
+
+    return gulp.src([
+            './assets/src/js/common/**/*.js',
+            './assets/src/js/pages/**/*.js',
+            './assets/src/js/plugins/**/*.js'
+        ])
+        .pipe(jshint())
+        .pipe(jshintReporter);
+});
+
+/*
+ * 打包脚本前清空dist/js/standalone
+ */
+var del = require('del');
+gulp.task('clean', function() {
+   return del([
+       path.join(__dirname, 'assets/dist/js/standalone') + '/**/*.js'
+   ]);
+});
+
 var webpack = require('webpack');
 var find = require('find');
-var uglify = require('gulp-uglify');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 /*
@@ -71,9 +106,9 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
  * 备注: 目前租车、酒店、欧铁业务线暂不考虑
  *
  */
-var keywordMap = ['index', 'list', 'detail'/*, 'channel', 'order', 'pay', 'album', 'activity', 'about'*/];
+var keywordMap = ['vip'/*'index', 'list', 'detail', 'channel', 'order', 'pay', 'activity', 'about'*/];
 
-gulp.task('script', function() {
+gulp.task('script', ['clean', 'jshint'], function() {
     // 适配不同的操作系统的路径规则
     var platform = process.platform,
         slash = /^win/.test(platform) ? '\\' : '/';
@@ -128,11 +163,14 @@ gulp.task('script', function() {
             chunks: dirArr,
             minChunks: 2
         }));
-        // uglify script
-        plugins.push(new webpack.optimize.UglifyJsPlugin({
-            sourceMap: false,
-            mangle: false       // 变量命名压缩，default false
-        }));
+        // 压缩脚本
+        // @usage cli: NODE_ENV=prod gulp TODO
+        if (process.env.NODE_ENV === 'prod') {
+            plugins.push(new webpack.optimize.UglifyJsPlugin({
+                sourceMap: false,
+                mangle: true       // 变量命名有损压缩，default false
+            }));
+        }
 
         webpack({
             entry: entry,
@@ -140,11 +178,21 @@ gulp.task('script', function() {
                 path: path.join(__dirname, 'assets/dist/js'),
                 filename: '[name].js'
             },
-            plugins: plugins
-        }, function(err, stats) {
+            plugins: plugins,
+            module: {
+                loaders: [
+                    { test: /\.dot$/, loader: 'html-loader' }       // 加载模板文件，默认使用.dot拓展名，使用dot作为模板引擎
+                ]
+            }
+        }, function(err) {
             if (err) console.log('webpack script error!'.red);
         });
-    }).error(function(err) {
+
+        // standalone files copy
+        gulp.src(path.join(__dirname, 'assets/src/js/standalone') + '/**/*.js')
+            .pipe(gulp.dest(path.join(__dirname, 'assets/dist/js/standalone')));
+
+    }).error(function() {
         console.log('find js files error!'.red);
     });
 });
@@ -196,6 +244,7 @@ gulp.task('watch', function() {
             case '.gif':
                 console.log('\nadd image!'.yellow);
                 gulp.start('image', function(err) {
+                    if (err) throw err;
                     console.log('√ image reloaded!\n'.green);
                 });
                 break;
@@ -203,6 +252,7 @@ gulp.task('watch', function() {
             case '.less':
                 console.log('\nadd style!'.yellow);
                 gulp.start('style', function(err) {
+                    if (err) throw err;
                     console.log('√ style reloaded!\n'.green);
                 });
                 break;
@@ -210,6 +260,14 @@ gulp.task('watch', function() {
             case '.coffee':
                 console.log('\nadd script!'.yellow);
                 gulp.start('script', function(err) {
+                    if (err) throw err;
+                    console.log('√ script reloaded!\n'.green);
+                });
+                break;
+            case '.dot':
+                console.log('\nadd dot template!'.yellow);
+                gulp.start('script', function(err) {
+                    if (err) throw err;
                     console.log('√ script reloaded!\n'.green);
                 });
                 break;
@@ -229,6 +287,7 @@ gulp.task('watch', function() {
             case '.gif':
                 console.log('\nimage change!'.red);
                 gulp.start('image', function(err) {
+                    if (err) throw err;
                     console.log('√ image reloaded!\n'.green);
                 });
                 break;
@@ -236,6 +295,7 @@ gulp.task('watch', function() {
             case '.less':
                 console.log('\nstyle change!'.yellow);
                 gulp.start('style', function(err) {
+                    if (err) throw err;
                     console.log('√ style reloaded!\n'.green);
                 });
                 break;
@@ -243,6 +303,14 @@ gulp.task('watch', function() {
             case '.coffee':
                 console.log('\nscript change!'.yellow);
                 gulp.start('script', function(err) {
+                    if (err) throw err;
+                    console.log('√ script reloaded!\n'.green);
+                });
+                break;
+            case '.dot':
+                console.log('\ndot template change!'.yellow);
+                gulp.start('script', function(err) {
+                    if (err) throw err;
                     console.log('√ script reloaded!\n'.green);
                 });
                 break;
@@ -263,6 +331,7 @@ gulp.task('watch', function() {
                 console.log('\nunlink image!'.red);
                 fs.unlink(file.replace('src', 'dist'));
                 gulp.start('image', function(err) {
+                    if (err) throw err;
                     console.log('√ image reloaded!\n'.green);
                 });
                 break;
@@ -271,6 +340,7 @@ gulp.task('watch', function() {
                 console.log('\nunlink style!'.red);
                 fs.unlink(file.replace('src', 'dist'));
                 gulp.start('style', function(err) {
+                    if (err) throw err;
                     console.log('√ style reloaded!\n'.green);
                 });
                 break;
@@ -279,6 +349,14 @@ gulp.task('watch', function() {
                 console.log('\nunlink script!'.red);
                 fs.unlink(file.replace('src', 'dist'));
                 gulp.start('script', function(err) {
+                    if (err) throw err;
+                    console.log('√ script reloaded!\n'.green);
+                });
+                break;
+            case '.dot':
+                console.log('\nnunlink dot template!'.yellow);
+                gulp.start('script', function(err) {
+                    if (err) throw err;
                     console.log('√ script reloaded!\n'.green);
                 });
                 break;
@@ -297,7 +375,7 @@ gulp.task('watch', function() {
  * @include: watch
  *
  */
-gulp.task('default', ['script', 'style', 'image', 'watch']);
+gulp.task('default', ['watch', 'script', 'style', 'image']);
 
 /*
  * product tasks
@@ -307,4 +385,4 @@ gulp.task('default', ['script', 'style', 'image', 'watch']);
  * @include: image
  *
  */
-gulp.task('prod', ['script', 'style', 'image']);
+gulp.task('build', ['script', 'style', 'image']);

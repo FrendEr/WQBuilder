@@ -1,0 +1,21 @@
+{{? it.length === 0 }}
+<p class="empty-tips">您目前还没有红包哦~</p>
+{{?}}
+
+<table class="coupons-redpack-table">
+    <col width="150px"></col>
+    <col width="530px"></col>
+    <col width="260px"></col>
+    <tr class="table-header">
+        <th>金额</th>
+        <th>来源描述</th>
+        <th>收入时间</th>
+    </tr>
+    {{~it :value:index}}
+        <tr>
+            <td>{{=value.amount}}</td>
+            <td>{{=value.sourceDescription}}</td>
+            <td>{{=value.createTime}}</td>
+        </tr>
+    {{~}}
+</table>
