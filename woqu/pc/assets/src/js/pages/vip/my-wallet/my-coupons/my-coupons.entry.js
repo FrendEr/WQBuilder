@@ -1,6 +1,11 @@
 var $ = require('../../../../vendors/jquery.min');
 
 /*
+ * 全站公用脚本
+ */
+require('../../../../common/woqu.common')();
+
+/*
  * 个人中心公共逻辑
  */
 var vipCommon = require('../../vip-common');

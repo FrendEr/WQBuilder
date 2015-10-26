@@ -73,7 +73,7 @@
                             </div>
         					<div class="divide-line"></div>
         				</li>
-    					<li>
+    					<!-- <li>
 							<i class="mycount-icon"></i>
 							<p>
 								<a target="_blank" href="https://vip.woqu.com/center/index">我的账户</a>
@@ -91,6 +91,14 @@
                                 </li>
 							</ul>
     						<div class="divide-line"></div>
+                        </li> -->
+                        <li class="lr-link">
+                            <a class="regist-link" href="javascript:;">注册</a>
+                            <div class="divide-line"></div>
+                        </li>
+                        <li class="lr-link">
+                            <a href="javascript:;">登录</a>
+                            <div class="divide-line"></div>
                         </li>
                     </ul>
 
@@ -152,8 +160,8 @@
                 <div class="section-warpper">
                     <section class="section order-section">
                         <div class="switch-tags">
-                            <span class="on" id="orderTotalNumber" data-value="12">全部（12）</span>
-                            <span id="orderWaitPayNumber" data-value="2">待付款（2）</span>
+                            <span class="on" id="orderTotalNumber" data-value="13">全部（13）</span>
+                            <span id="orderWaitPayNumber" data-value="13">待付款（13）</span>
                             <span id="orderWaitCmtNumber" data-value="0">待点评（0）</span>
                             <a class="hover-order-status" href="javascript:;"><i></i>订单状态</a>
                         </div>
@@ -175,6 +183,62 @@
                 </div>
             </div>
         </footer>
+
+        <!-- bubble components -->
+        <ul class="bubble-list">
+            <li>
+                <a class="wechat-bubble" href="javascript:;"></a>
+                <div class="bubble-slide">
+                    <img src="//quimg.com/pc/assets/dist/img/components/bubble/wechat-code.jpg" width="190" height="260">
+                </div>
+            </li>
+            <li>
+                <a class="tel-bubble" href="javascript:;"></a>
+                <div class="bubble-slide double-slide">
+                    <p>
+        				<span class="country">中国本地拨打</span><span>400-661-5757</span>
+        			</p>
+        			<p>
+        				<span class="country">国际通用拨打</span><span>86-755-3667-7780</span>
+        			</p>
+        			<p>
+        				<span class="country">美国本地拨打</span><span>855-967-8266</span>
+        			</p>
+        			<p>
+        				<span class="country">加拿大本地拨打</span><span>855-967-8266</span>
+        			</p>
+        			<p>
+        				<span class="country">澳大利亚本地拨打</span><span>1800-204-810</span>
+        			</p>
+        			<p>
+        				<span class="country">新西兰本地拨打</span><span>0800-440-238</span>
+        			</p>
+                </div>
+            </li>
+            <li>
+                <a id="feedbackBubble" class="feedback-bubble" href="javascript:;"></a>
+                <div class="bubble-slide single-slide">
+                    <p>用户反馈</p>
+                </div>
+            </li>
+            <li>
+                <a class="top-bubble" href="javascript:;"></a>
+            </li>
+        </ul>
+        <div id="feedbackWrapper" class="feedback-wrapper">
+            <span class="mask"></span>
+            <div class="feedback-dialog">
+                <h3>意见反馈</h3>
+                <div class="feedback-input clearfix" id="feedbackInput">
+                    <textarea class="feedback-content" id="feedbackContent" placeholder="输入您的意见"></textarea>
+                    <input class="your-email" id="feedbackContact" type="text" placeholder="输入您的邮箱或者手机号码">
+                </div>
+                <div class="feedback-btns clearfix">
+                    <button class="btn btn-confirm btn-w110 btn-h30" id="feedbackSubmit">提交</button>
+                    <button class="btn btn-cancel btn-w110 btn-h30" id="feedbackCancel">取消</button>
+                </div>
+            </div>
+        </div>
 
         <script src="//quimg.com/pc/assets/dist/js/woqu.base.js" charset="utf-8"></script>
         <script src="//quimg.com/pc/assets/dist/js/pages/vip/vip.base.js" charset="utf-8"></script>

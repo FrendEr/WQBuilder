@@ -1,0 +1,39 @@
+{{? it.length === 0 }}
+<p class="empty-tips">暂无提问信息</p>
+{{?}}
+
+{{? it.length !== 0 }}
+
+<table class="question-table">
+    <col width="490px"></col>
+    <col width="160px"></col>
+    <col width="330px"></col>
+    <tr class="table-header">
+        <th>问题/回答</th>
+        <th>提问时间</th>
+        <th>产品信息</th>
+    </tr>
+    {{~it:value:index}}
+        <tr>
+            <td>
+                <p class="question-centent"><i></i>问题：{{=value.comment}}</p>
+                {{? value.reply !== ''}}
+                    <p class="anwser-content"><i></i>回答：{{=value.reply}}</p>
+                {{?}}
+            </td>
+            <td class="question-time">
+                {{=value.createTime}}
+            </td>
+            <td class="product-info">
+                <span>【境外参团】</span>
+                <p>{{=value.productTitle}}</p>
+            </td>
+        </tr>
+        {{? index !== it.length - 1}}
+            <tr class="question-divide">
+                <td colspan="3"></td>
+            </tr>
+        {{?}}
+    {{~}}
+</table>
+{{?}}

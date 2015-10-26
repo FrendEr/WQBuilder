@@ -1,0 +1,44 @@
+{
+"rs": "1",
+"msg": null, 
+"code": null,
+"total":100,
+"data": [
+	   {
+		    "id":23,
+			"comment":"良辰不介意陪你玩玩",
+			"createTime":"2015-06-16 09:45:08",
+			"reply":"亲爱的用户，您好！这是可以的，我们提供酒店预订服务。您可以移步到http://www.woqu.com/north_ame-rica/hotel，或者您可以直接拨打热线电话400-661-5757，咨询客服，谢谢！",
+			"productTitle":"7日<畅玩>黄石公园、大提顿国家公园、布莱斯峡谷、包伟湖、大峡谷西缘超值游（黄石公园经典行程）",
+			"businessID": "bu27ac142",
+			"productCategory": "localjoin"
+		},
+		{
+		   "id":23,
+			"comment":"良辰不介意陪你玩玩",
+			"createTime":"2015-06-16 09:45:08",
+			"reply":"",
+			"productTitle":"7日<畅玩>黄石公园、大提顿国家公园、布莱斯峡谷、包伟湖、大峡谷西缘超值游（黄石公园经典行程）",
+			"businessID": "bu27ac142",
+			"productCategory": "localjoin"
+		},
+		{
+		    "id":23,
+			"comment":"良辰不介意陪你玩玩",
+			"createTime":"2015-06-16 09:45:08",
+			"reply":"亲爱的用户，您好！这是可以的，我们提供酒店预订服务。您可以移步到http://www.woqu.com/north_ame-rica/hotel，或者您可以直接拨打热线电话400-661-5757，咨询客服，谢谢！",
+			"productTitle":"7日<畅玩>黄石公园、大提顿国家公园、布莱斯峡谷、包伟湖、大峡谷西缘超值游（黄石公园经典行程）",
+			"businessID": "bu27ac142",
+			"productCategory": "localjoin"
+		},
+		{
+		    "id":23,
+			"comment":"良辰不介意陪你玩玩",
+			"createTime":"2015-06-16 09:45:08",
+			"reply":"",
+			"productTitle":"7日<畅玩>黄石公园、大提顿国家公园、布莱斯峡谷、包伟湖、大峡谷西缘超值游（黄石公园经典行程）",
+			"businessID": "bu27ac142",
+			"productCategory": "localjoin"
+		}
+	]
+}

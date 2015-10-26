@@ -1,6 +1,11 @@
 var $ = require('../../../vendors/jquery.min');
 
 /*
+ * 全站公用脚本
+ */
+require('../../../common/woqu.common')();
+
+/*
  * 个人中心公共逻辑
  */
 var vipCommon = require('../vip-common');
@@ -22,9 +27,9 @@ vipCommon.simplePagination();
  * 初始化全部订单列表
  */
 var orderTotalNumber = parseInt($('#orderTotalNumber').data('value'));
-var getOrderUrl = 'http://127.0.0.1:3000';
+var getOrderUrl = 'http://vip.woqu.com/get-order-list';
 if (orderTotalNumber) {
-    getOrderList(orderTotalNumber, 1, 10, getOrderUrl);
+    getOrderList(orderTotalNumber, 1, 1, 10, getOrderUrl);
 }
 
 /*
@@ -33,21 +38,26 @@ if (orderTotalNumber) {
 $('.switch-tags').on('click', 'span', function(event) {
     var $this = $(this),
         targetId = event.target.id,
+        flag = $this.index() + 1,
         orderTotalNumber = parseInt($this.data('value'));
 
-    getOrderList(orderTotalNumber, 1, 10, getOrderUrl);
+    getOrderList(orderTotalNumber, flag, 1, 10, getOrderUrl);
 });
 
 /*
  * 订单接口调用函数
  */
-function getOrderList(orderTotalNumber, pageNo, pageSize, getOrderUrl) {
+function getOrderList(orderTotalNumber, flag, pageNo, pageSize, getOrderUrl) {
     if (orderTotalNumber === 0) {
         $('#orderList').html('<p class="empty-tips">暂无订单信息</p>');
+        $('#pagination').empty();
         return;
     }
 
+    $('#orderList').html('<p class="checking-tips">订单信息查询中...</p>');
+
     $.post(getOrderUrl, {
+        flag: flag || 1,
         pageNo: pageNo,
         pageSize: pageSize
     }, function(data) {
@@ -67,7 +77,7 @@ function getOrderList(orderTotalNumber, pageNo, pageSize, getOrderUrl) {
             nextText: '下一页 >',
             currentPage: pageNo,
             onPageClick: function(pageNumber) {
-                getOrderList(orderTotalNumber, pageNumber, 10, getOrderUrl);
+                getOrderList(orderTotalNumber, flag, pageNumber, 10, getOrderUrl);
             }
         });
     });

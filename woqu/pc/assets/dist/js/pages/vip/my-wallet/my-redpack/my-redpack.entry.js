@@ -1,4 +1,4 @@
-webpackJsonp([4,10],{
+webpackJsonp([4,12],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
@@ -15,7 +15,7 @@ webpackJsonp([4,10],{
 	 * 初始化模板
 	 */
 	var doT = vipCommon.doT;
-	var redpackTemplate = __webpack_require__(9);
+	var redpackTemplate = __webpack_require__(12);
 	var tempFn = doT.template(redpackTemplate);
 
 	/*
@@ -81,7 +81,7 @@ webpackJsonp([4,10],{
 
 /***/ },
 
-/***/ 9:
+/***/ 12:
 /***/ function(module, exports) {
 
 	module.exports = "{{? it.length === 0 }}\r\n<p class=\"empty-tips\">您目前还没有红包哦~</p>\r\n{{?}}\r\n\r\n<table class=\"coupons-redpack-table\">\r\n    <col width=\"150px\"></col>\r\n    <col width=\"530px\"></col>\r\n    <col width=\"260px\"></col>\r\n    <tr class=\"table-header\">\r\n        <th>金额</th>\r\n        <th>来源描述</th>\r\n        <th>收入时间</th>\r\n    </tr>\r\n    {{~it :value:index}}\r\n        <tr>\r\n            <td>{{=value.amount}}</td>\r\n            <td>{{=value.sourceDescription}}</td>\r\n            <td>{{=value.createTime}}</td>\r\n        </tr>\r\n    {{~}}\r\n</table>\r\n";

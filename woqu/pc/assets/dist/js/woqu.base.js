@@ -30,8 +30,8 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		11:0,
-/******/ 		10:0
+/******/ 		13:0,
+/******/ 		12:0
 /******/ 	};
 
 /******/ 	// The require function
@@ -77,7 +77,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"pages/album/oranges.entry","1":"pages/vip/account-index/account-index.entry","2":"pages/vip/my-order/my-order.entry","3":"pages/vip/my-wallet/my-coupons/my-coupons.entry","4":"pages/vip/my-wallet/my-redpack/my-redpack.entry","5":"pages/vip/personal-center/my-collect/my-collect.entry","6":"pages/vip/personal-center/my-comment/my-comment.entry","7":"pages/vip/personal-center/my-information/my-information.entry","8":"pages/vip/personal-center/my-question/my-question.entry","9":"pages/vip/personal-center/my-topic/my-topic.entry","10":"vip.base"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"pages/album/oranges.entry","1":"pages/vip/account-index/account-index.entry","2":"pages/vip/my-order/my-order.entry","3":"pages/vip/my-wallet/my-coupons/my-coupons.entry","4":"pages/vip/my-wallet/my-redpack/my-redpack.entry","5":"pages/vip/personal-center/add-general-visiors/add-general-visitors.entry","6":"pages/vip/personal-center/my-collect/my-collect.entry","7":"pages/vip/personal-center/my-comment/my-comment.entry","8":"pages/vip/personal-center/my-general/my-general.entry","9":"pages/vip/personal-center/my-information/my-information.entry","10":"pages/vip/personal-center/my-question/my-question.entry","11":"pages/vip/personal-center/my-topic/my-topic.entry","12":"vip.base"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -501,6 +501,441 @@
 	    };
 	};
 
+
+/***/ },
+/* 6 */,
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(1);
+	var escape = __webpack_require__(8);
+	var regExpTest = __webpack_require__(9);
+
+	module.exports = function() {
+	    /*
+	     * 回到顶部
+	     */
+	    var topBubble = $('.top-bubble');
+	    $(window).scroll(function() {
+	        if ($(this).scrollTop() > 300) {
+	            topBubble.fadeIn();
+	        } else {
+	            topBubble.hide();
+	        }
+	    });
+
+	    topBubble.on('click', function() {
+	        $(window).scrollTop(0);
+	    });
+
+	    /*
+	     * 用户反馈
+	     */
+	    var feedbackBubble = $('#feedbackBubble');
+	    var feedbackWrapper = $('#feedbackWrapper');
+	    feedbackBubble.on('click', function() {
+	        $('#feedbackContent').val('');
+	        $('#feedbackContact').val('');
+	        $.get(window.location.protocol + '//w.woqu.com/feedback', function(data) {
+				if (data === '') {
+					$('#feedbackContact').show();
+				} else {
+	                $('#feedbackContact').val(data);
+	            }
+				feedbackWrapper.show();
+	    	});
+	    });
+	    feedbackWrapper.on('click', '.mask, #feedbackCancel', function() {
+	        feedbackWrapper.hide();
+	    });
+	    feedbackWrapper.on('click', '#feedbackSubmit', function() {
+	        var content = escape($.trim($('#feedbackContent').val())),
+	            contact = escape($.trim($('#feedbackContact').val()));
+
+	        if (content === '') {
+	            alert('请输入您的意见内容');
+	            return;
+	        }
+
+	        if (!regExpTest('email', contact).code && !regExpTest('mobileCN', contact).code) {
+	            alert('请输入正确的邮箱或者手机号码');
+	            return;
+	        }
+
+	        $.post(window.location.protocol + '//w.woqu.com/feedback/submit', {
+				content: content,
+				contact: contact,
+				sourceUrl: window.location.href
+			}, function(data) {
+				var jsonData = JSON.parse(data);
+				if (jsonData.result) {
+					window.alert('提交成功！');
+					setTimeout(function() {
+						$('#feedbackWrapper').hide();
+					}, 2000);
+	            } else {
+	                window.alert('提交失败！');
+	            }
+	        });
+	    });
+
+	    /*
+	     * 全站placeholder兼容
+	     */
+	    if (!Modernizr.placeholder) {           // Modernizr为全局引入变量，用于兼容性检测，请不要自己手动检测
+	        $('input[type="text"][placeholder], textarea[placeholder]').each(function() {
+	            var $this = $(this),
+	                placecontent = $this.attr('placeholder');
+
+	            if (placecontent !== '') {
+	                $this
+	                .val(placecontent)
+	                .css('color', '#848484')
+	                .on('focus', function() {
+	                    $this.css('color', '#333');
+	                    if ($.trim($this.val()) == placecontent) {
+	                        $this.val('');
+	                    }
+	                })
+	                .on('blur', function() {
+	                    if ($.trim($this.val()) === '' || $.trim($this.val()) == placecontent) {
+	                        $this.val(placecontent).css('color', '#848484');
+	                    } else {
+	                        $this.css('color', '#333');
+	                    }
+	                });
+	            }
+	        });
+	    }
+	};
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	/*
+	 * html转码，对于表单数据、ajax参数需要使用
+	 */
+	module.exports = function(string) {
+	    return string
+	            .replace('<', '&lt;')
+	            .replace('>', '&gt;')
+	            .replace('&', '&amp;')
+	            .replace(/"/g, '&quot;')
+	            .replace(/'/g, '&apos;');
+	};
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	/*
+	 * 字符串格式正则匹配
+	 */
+	module.exports = function(type, content) {
+	    var regExpMap = {
+			'common'			: /[\s\S]*/,													//匹配任何内容
+			'chinese'  			: /^[\u4e00-\u9fa5]{1,}$/,										//中文
+			'noChinese'			: /^[^\u4e00-\u9fa5]{0,}$/,										//非中文
+			'letter'			: /^[a-zA-Z]+([a-zA-Z]|\s)*$/,									//纯字母
+			'number'			: /^\d+$/, 														//匹配数字
+			'numberLimit10'		: /^\d{10}$/, 													//匹配10位数字
+			'bankCard'			: /^\d{15,19}$/,												//银行卡号
+			'idCard'			: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,					//身份证号码
+	        'creditMonth'		: /^(([0][1-9])|([1][0-2]))$/,
+	        'creditYear'		: /^(\d){1,2}$/,
+	        'creditCvc'			: /^(\d){3,4}$/,
+	        'creditNumberUSA'	: /^(\d){5,19}$/,
+			'email'				: /^\w+([-.]\w+)*@\w+([-]\w+)*\.(\w+([-]\w+)*\.)*[a-z]{2,3}$/,
+			'mobileCN'			: /^1[0-9]{10}$/,												 //中国1开头的11位数字
+			'mobileUSA'			: /^[0-9]{10,11}$/, 											 //美国10位数字
+			'mobileCAD'			: /^[0-9]{10,11}$/, 											 //加拿大10位数字
+			'mobileAUD'			: /^[0-9]{9,10}$/, 												 //澳大利亚9位
+			'mobileNZD'			: /^[0-9]{9,10}$/, 												 //新西兰9位数字
+			'mobileHK'			: /^[0-9]{8,9}$/, 												 //香港
+			'mobileMacau'		: /(^0\d{8}$)|(^6\d{7}$)/, 										 //澳门
+			'mobileTW'			: /^[0-9]{9,10}$/, 												 //台湾
+			'mobileUK'			: /(^0\d{10}$)|(^7\d{9}$)/,										 //英国手机号码位数：10位数字，7开头
+			'mobileFrance'		: /^[0-9]{9,10}$/, 												 //法国手机号码位数：9位数字
+			'mobileGermany'		: /^[0-9]{10,11}$/, 											 //德国手机号码位数：11位数字
+			'mobileBelgium'		: /(^0\d{9}$)|(^4\d{8}$)/, 										 //比利时手机号码位数：10位数字，4开头
+			'mobileItaly'		: /(^0\d{10}$)|(^3\d{9}$)/, 									 //意大利手机号码位数：10位数字
+			'mobileSpain'		: /(^0\d{9}$)|(^7\d{8}$)|(^6\d{8}$)/, 							 //西班牙手机号码位数：9位数字，以6开头
+			'mobileSwiss'		: /^[0-9]{9,10}$/, 												 //瑞士手机号码位数：10位数字，07开头
+			'mobileHolland'		: /(^0\d{9}$)|(^6\d{8}$)/, 										 //荷兰手机号码位数：10位数字，以06开头
+			'mobileGreece'		: /(^0\d{10}$)|(6\d{9}$)/, 										 //希腊手机号码位数：10位数字
+			'mobileNorway'		: /(^0\d{8}$)|(^4\d{7}$)|(^9\d{7}$)/,
+			'password'			: /^[a-zA-Z0-9]{6,22}$/,
+			'registPassword'    : /^[0-9a-zA-Z_]{6,22}$/,                                        //验证由数字、26个英文字母或者下划线组成的密码
+			'telephone' 		: /^[+]{0,1}(\d){1,4}[ ]{0,1}([-]{0,1}((\d)|[ ]){1,12})+$/,
+			'date'				: /^\d{4}-\d{2}-\d{2}$/, 										 //简单日期格式判断  1990-12-12
+			'flightNum'			: /^[a-zA-Z]{2}[0-9]{1,4}$/,									 //航班号格式判断	航空公司双字码（字母两位） + 2-4位数字
+			'hour'				: /^(1|0)[0-9]|2[0-3]$/,										 //小时格式判断(24小时制)
+			'minute'			: /^[0-5][0-9]$/,												 //分钟格式判断
+			'passportNum'		: /^[0-9a-zA-Z]{0,12}?$/    									 //护照号码正则
+		},
+		regExpErrMap = {
+			'email'				: '邮箱格式错误',
+			'mobile'			: '手机格式错误',
+			'letter'			: '请输入英文字母',
+			'chinese'			: '请输入中文',
+			'noChinese'			: '此处不允许输入中文',
+			'number'			: '请输入正确数字',
+			'numberLimit10'		: '请输入正确的10位数字',
+			'bankCard'			: '请输入正确的银行卡号',
+			'idCard'			: '请输入正确的身份证号码',
+			'creditMonth'		: '请输入2位的月数',
+	        'creditYear'		: '请输入2位的年数',
+	        'creditCvc'			: '请输入正确的验证码',
+	        'creditNumberUSA'	: '请输入正确的卡号',
+			'mobileCN'			: '手机格式错误(中国)',
+			'mobileUSA'			: '手机格式错误(美国/加拿大)',
+			'mobileCAD'			: '手机格式错误(美国/加拿大)',
+			'mobileAUD'			: '手机格式错误(澳大利亚)',
+			'mobileNZD'			: '手机格式错误(新西兰)',
+			'mobileHK'			: '手机格式错误(香港)',
+			'mobileMacau'		: '手机格式错误(澳门)',
+			'mobileTW'			: '手机格式错误(台湾)',
+			'mobileUK'			: '手机格式错误(英国)',
+			'mobileFrance'		: '手机格式错误(法国)',
+			'mobileGermany'		: '手机格式错误(德国)',
+			'mobileBelgium'		: '手机格式错误(比利时)',
+			'mobileItaly'		: '手机格式错误(意大利)',
+			'mobileSpain'		: '手机格式错误(西班牙)',
+			'mobileSwiss'		: '手机格式错误(瑞士)',
+			'mobileHolland'		: '手机格式错误(荷兰)',
+			'mobileGreece'		: '手机格式错误(希腊)',
+			'mobileNorway'		: '手机格式错误(挪威)',
+			'telephone' 		: '座机格式错误',
+			'password'			: '密码长度必须为6-22位',
+			'registPassword'    : '密码格式错误',
+			'date'				: '请选择日期',
+			'flightNum'			: '请输入正确的航班号码',
+			'hour'				: '请输入正确的小时',
+			'minute'			: '请输入正确的分钟',
+			'passportNum' 		: '护照号码不符合规则'
+		};
+
+		return {
+	        code: regExpMap[type].test(content),
+	        msg: regExpErrMap[type]
+	    };
+	};
+
+
+/***/ },
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(1);
+
+	var cssText = [],d = document;
+
+	cssText[cssText.length] = '<style>';
+	cssText[cssText.length] = '.wq_dialog_cover{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;opacity: 0.4;filter: alpha(opacity=40);z-index:9997;}';
+	cssText[cssText.length] = '.wq_dialog{border: 1px solid #cfdfdf;position:fixed;top:50%;left:50%;background:#fff;z-index:9999;max-width:900px;border-radius:4px;box-shadow:0 0 2px #ccc;}';
+	cssText[cssText.length] = '.wq_dialog_title{height:40px;background:#e5fbfb;line-height:40px;font-size:16px;text-indent:20px;display:none;}';
+	cssText[cssText.length] = '.wq_dialog_close{display:none;position:absolute;top:10px;right:10px;width:18px;height:18px;background:url(//www.quimg.com/a7735/img/page/list/eurail/list-icon.png) no-repeat right bottom;cursor:pointer;}';
+	cssText[cssText.length] = '.wq_dialog_content{padding:20px;overflow:hidden;font-size:14px;}';
+	cssText[cssText.length] = '.wq_dialog_content h2{font-size:16px;color:#0aaa96;font-weight:700;line-height:30px;}';
+	cssText[cssText.length] = '.wq_dialog_content h3{font-size:14px;color:#0aaa96;}';
+	cssText[cssText.length] = '.wq_dialog_content p{font-size:14px;line-height:26px;}';
+	cssText[cssText.length] = '.wq_dialog_cusp{display:none;position:absolute;width:14px;height:7px;background: url(//www.quimg.com/a9000/img/page/channel/around/bus-all.png) no-repeat;}';
+	cssText[cssText.length] = '.wq_dialog_cusp_top{top:-7px;background-position: -370px 0;}';
+	cssText[cssText.length] = '.wq_dialog_cusp_bottom{bottom:-7px;background-position: -370px -7px;}';
+	cssText[cssText.length] = '</style>';
+
+	d.write(cssText.join(''));
+
+	var layer = {
+		param:{
+			defaults:{
+				title:null,
+				content:'',
+				close:true,
+				ok:false,
+				cancel:false,
+				cover:false,
+				width:null,
+				height:null,
+				innerHTML:[
+					'<div class="wq_dialog">',
+						'<div class="wq_dialog_title"></div>',
+						'<div class="wq_dialog_content"></div>',
+						'<div class="wq_dialog_close"></div>',
+						'<div class="wq_dialog_cusp"></div>',
+					'</div>'].join('')
+			},
+			elem:null,
+			timer:null
+		},
+		create:function(opts){
+			if(this.param.timer)clearTimeout(this.param.timer);
+			if(this.param.elem)this.close();		
+			opts.id = 'wq_dialog_'+ (new Date() - 0);		
+			var $this = this;
+			var	options = $.extend({},$this.param.defaults,opts);
+			var	$elem = $(options.innerHTML).appendTo($('body'));
+			var backdrop;
+			//set id
+			$elem.attr('id', opts.id);
+			$this.param.elem = $elem;	
+			//cover
+			if(options.cover){
+				backdrop = $('<div class="wq_dialog_cover"></div>').appendTo($('body'));
+				backdrop.on('click',function(){
+					backdrop.hide().remove();
+					$this.close();
+				});
+			}
+			//关闭按钮
+			if(options.close){
+				$this._$('close')
+				.on('click',function(){
+					if(backdrop)backdrop.hide().remove();
+					$this.close();
+				}).show();
+			}
+			//title
+			if(options.title){
+				$this.title(options.title);
+			}
+			//content
+			if(options.content){
+				$this.content(options.content);		
+			}
+			//width
+			if(options.width){
+				$this.width(options.width);
+			}
+			//height
+			if(options.height){
+				$this.height(options.height);
+			}
+			return $this;		
+		},
+		dialog:function(opts){
+			var $this = this;
+			$this.create(opts).setDiaposi(opts).resize(opts);
+			return $this;
+		},
+		hoverTip:function(target,opts,type){
+			if(!target)return;
+			var $this = this;
+			opts.close = false;
+			opts.cover = false;
+			$this.create(opts).setHoverposi(target,type);
+			$this.param.elem.hover(function(){
+				if($this.param.timer)clearTimeout($this.param.timer);			
+			},function(){
+				$this.param.timer = setTimeout(function(){
+					$this.close();
+				},100);
+			});	
+			return $this;
+		},
+		_$:function(i){
+			return this.param.elem.find('.wq_dialog_'+i);
+		},
+		content:function(v){
+			this._$('content').html(v);
+		},
+		title:function(v){
+			this._$('title').text(v).show();
+		},
+		width:function(v){
+			this.param.elem.css('width',v);
+		},
+		height:function(v){
+			this.param.elem.css('height',v);
+		},
+		show:function(){
+			if(this.param.timer)clearTimeout(this.param.timer);
+			this.param.elem.show();
+		},
+		close:function(time){
+			var $this = this;
+			if($this.param.timer)clearTimeout($this.param.timer);
+			if(time){
+				$this.param.timer = setTimeout(function(){
+					$this.param.elem.hide().remove();
+				},time);
+			}else{
+				$this.param.elem.hide().remove();
+			}		
+		},
+		cusp:function(v){
+			this._$('cusp').addClass(this._$('cusp').attr('class')+'_'+v);
+		},
+		setDiaposi:function(opts){
+			var _content = this._$('content'),
+		    	_W = this.param.elem.width(),
+		    	_H = opts.height ? opts.height : this.param.elem.height(),
+		    	_MAX_H = ($(window).height() > 900) ? 900 : $(window).height();
+			if(_H > _MAX_H){
+				this.param.elem.css({marginLeft:-_W/2,height:_MAX_H,marginTop:-_MAX_H/2});			
+			}else{
+				this.param.elem.css({marginLeft : -_W/2,marginTop  : -_H/2});
+			}
+			var _MAX_CH = this.param.elem.height() - (opts.title ? 40 : 0);
+			 _content.css('height',_MAX_CH-40);
+			//_content.height() > _MAX_CH ? _content.css('overflowY','scroll') : _content.css('overflowY','auto');
+			if(_content.height() > _MAX_CH){
+				_content.css('overflowY','scroll');
+			}else{
+				_content.css('overflowY','auto');
+			}	
+			return this;
+		},
+		setHoverposi:function(target,type){	
+			this._$('content').css('padding','10px');
+			var type = type || 'bottom';
+			var	ow = this.param.elem.outerWidth();
+			var	oh = this.param.elem.outerHeight();
+			var	tw = $(target).outerWidth();
+			var	th = $(target).outerHeight();
+			var	winw = $(window).width();
+			var	winh = $(window).height();
+			var scrollTop = $(window).scrollTop();
+			var	left = $(target).offset().left;
+			var	top = $(target).offset().top;
+			var	css = {position:'absolute'};
+			css.left = ow/2  > (left + tw/2) ? 0 : left + tw/2 - ow/2;
+			this._$('cusp').css('left',left - css.left + tw/2 - 7).show();
+			if(type == 'bottom'){						
+				//if(oh > winh + scrollTop - top - th){
+				//	css.top = top - oh - 10;
+				//	this.cusp('bottom');
+				//}else{
+					css.top = top + th + 10 ;
+					this.cusp('top');
+				//}		
+			}else{			
+				//if(oh > top - scrollTop){
+				//	css.top = top + th + 10;
+				//	this.cusp('top');
+				//}else{
+					css.top = top - oh - 10 ;
+					this.cusp('bottom');
+				//}
+			}
+			this.param.elem.css(css);	
+			return this;
+		},
+		resize:function(opts){
+			var $this = this;
+			$(window).on('resize',function(){
+				$this.setDiaposi(opts);
+			});
+			return this;
+		}	
+	};
+	module.exports = layer;
 
 /***/ }
 /******/ ]);

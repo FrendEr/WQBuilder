@@ -1,0 +1,42 @@
+{{? it.length === 0 }}
+<p class="empty-tips">暂无订单信息</p>
+{{?}}
+
+{{? it.length !== 0 }}
+
+<table class="comment-table">
+    <col width="800px"></col>
+    <col width="180px"></col>
+    {{~it:value:index}}
+        <tr class="comment-divide">
+            <td colspan="2"></td>
+        </tr>
+        <tr class="title-tr">
+            <td colspan="2">
+                <span class="product-title">{{=value.title}}</span>
+                <span class="trip-date">出发日期：{{=value.travelDate}}</span>
+            </td>
+        </tr>
+        <tr class="comment-tr">
+            <td>
+                <div class="comment-info">
+                    <div class="score-star">
+                        <span>综合评分 :<span class="star star3"><i></i></span></span>
+                        <span>交通路线 :<span class="star star2"><i></i></span></span>
+                        <span>住宿餐饮 :<span class="star star1"><i></i></span></span>
+                        <span>导游讲解 :<span class="star star0"><i></i></span></span>
+                    </div>
+                    <p class="comment-content">{{=value.commentContent}}</p>
+                    <p class="comment-time">评论时间：{{=value.createTime}}</p>
+                </div>
+            </td>
+            <td>
+                <div class="comment-coupons">
+                    <p>该点评已获得</p>
+                    <p><span>￥100</span> 优惠券</p>
+                </div>
+            </td>
+        </tr>
+    {{~}}
+</table>
+{{?}}

@@ -1,3 +1,15 @@
+/* =================================
+ *
+ * @author  Frend
+ * @github  https://github.com/FrendEr/woqu-builder
+ * @tips    此流程已经适应项目大部分需求，不再更新，最新版本以github上为准
+ * @update  - ES6 support (支持ES6编译)
+ *          - components support (支持组件打包)
+ *          - test case support (支持测试)
+ *
+ * =================================
+ */
+
 var path = require('path');
 var fs = require('fs');
 var gulp = require('gulp');
@@ -61,15 +73,31 @@ gulp.task('image', function() {
 var jshint = require('gulp-jshint');
 var map = require('map-stream');
 gulp.task('jshint', function() {
-    var jshintReporter = map(function (file, cb) {
+    var jshintReporter = map(function (file, callback) {
         if (!file.jshint.success) {
-            console.log('jshint error message: '.red + 'script fail in ' + file.path);
+            var errors = file.jshint.results;
+
+            console.log('\nJSHint error message: '.red.bold);
+            console.log('File  Path : '.yellow.bold + file.path);
+            console.log('Error Count: '.yellow.bold + errors.length);
+
+            for (var i = 0; i < errors.length; i++) {
+                var error = errors[i].error;
+                console.log('================ ' + 'error '.red + colors.red(i + 1) + ' ================');
+                console.log('raw       : '.bold + error.raw);
+                console.log('evidence  : '.bold + error.evidence);
+                console.log('line      : '.bold + error.line);
+                console.log('character : '.bold + error.character);
+                console.log('reason    : '.bold + error.reason);
+                console.log('=========================================\n');
+            }
         }
-        cb(null, file);
+        callback(null, file);
     });
 
     return gulp.src([
             './assets/src/js/common/**/*.js',
+            './assets/src/js/utils/**/*.js',
             './assets/src/js/pages/**/*.js',
             './assets/src/js/plugins/**/*.js'
         ])
@@ -181,7 +209,17 @@ gulp.task('script', ['clean', 'jshint'], function() {
             plugins: plugins,
             module: {
                 loaders: [
-                    { test: /\.dot$/, loader: 'html-loader' }       // 加载模板文件，默认使用.dot拓展名，使用dot作为模板引擎
+                    // 支持脚本文件es6编译
+                    // {
+                    //     test: /\.js$/,
+                    //     exclude: /(node_modules|bower_components|vendors|standalone)/,
+                    //     loader: 'babel-loader'
+                    // },
+                    // 加载模板文件，默认使用.dot拓展名，使用dot作为模板引擎
+                    {
+                        test: /\.dot$/,
+                        loader: 'html-loader'
+                    }
                 ]
             }
         }, function(err) {

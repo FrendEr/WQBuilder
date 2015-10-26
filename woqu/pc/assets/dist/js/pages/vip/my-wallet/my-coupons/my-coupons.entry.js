@@ -1,9 +1,14 @@
-webpackJsonp([3,10],{
+webpackJsonp([3,12],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(1);
+
+	/*
+	 * 全站公用脚本
+	 */
+	__webpack_require__(7)();
 
 	/*
 	 * 个人中心公共逻辑
@@ -15,7 +20,7 @@ webpackJsonp([3,10],{
 	 * 初始化模板
 	 */
 	var doT = vipCommon.doT;
-	var couponsTemplate = __webpack_require__(8);
+	var couponsTemplate = __webpack_require__(11);
 	var tempFn = doT.template(couponsTemplate);
 
 	/*
@@ -114,7 +119,7 @@ webpackJsonp([3,10],{
 
 /***/ },
 
-/***/ 8:
+/***/ 11:
 /***/ function(module, exports) {
 
 	module.exports = "{{? it.length === 0 }}\r\n<p class=\"empty-tips\">您目前还没有优惠券哦~</p>\r\n{{?}}\r\n\r\n<table class=\"coupons-redpack-table\">\r\n    <col width=\"170px\"></col>\r\n    <col width=\"170px\"></col>\r\n    <col width=\"170px\"></col>\r\n    <col width=\"170px\"></col>\r\n    <col width=\"170px\"></col>\r\n    <col width=\"90px\"></col>\r\n    <tr class=\"table-header\">\r\n        <th>编号</th>\r\n        <th>面值</th>\r\n        <th>使用范围</th>\r\n        <th>生效时间</th>\r\n        <th>到期时间</th>\r\n        <th>优惠说明</th>\r\n    </tr>\r\n    {{~it :value:index}}\r\n        <tr>\r\n            <td>{{=value.couponCode}}</td>\r\n            <td>{{=value.currency}}{{=value.amount}}</td>\r\n            <td>{{=value.activeRange}}</td>\r\n            <td>{{=value.effTime}}</td>\r\n            <td>{{=value.expTime}}</td>\r\n            <td><a class=\"check-coupons\" href=\"\">查看</a></td>\r\n        </tr>\r\n    {{~}}\r\n</table>\r\n";

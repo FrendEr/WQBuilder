@@ -1,0 +1,35 @@
+{{? it.length === 0 }}
+<p class="empty-tips">暂无话题信息</p>
+{{?}}
+
+{{? it.length !== 0 }}
+
+<table class="topic-table">
+    <col width="460px"></col>
+    <col width="160px"></col>
+    <col width="160px"></col>
+    <col width="160px"></col>
+    <tr class="table-header">
+        <th>话题</th>
+        <th>主题板块</th>
+        <th>回应数</th>
+        <th>关注数</th>
+    </tr>
+    {{~it:value:index}}
+        <tr>
+            <td><a href="{{=value.url}}">{{=value.title}}</a></td>
+            <td>
+                {{? value.section === 1}}
+                图文
+                {{?? value.section === 2}}
+                旅游攻略
+                {{?? value.section === 3}}
+                投诉建议
+                {{?}}
+            </td>
+            <td>{{=value.replyCount}}</td>
+            <td>{{=value.followCount}}</td>
+        </tr>
+    {{~}}
+</table>
+{{?}}

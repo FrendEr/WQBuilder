@@ -1,0 +1,43 @@
+<div class="input-group">
+    <label class="title-label" for="cnName">中文姓名</label>
+    <input type="text" id="cnName" value="{{? it.cnName !== null}}it.cnName{{?}}">
+</div>
+<div class="input-group">
+    <label class="title-label" for="enLastName">英文姓名</label>
+    <input type="text" id="enLastName" placeholder="姓/LastName" value="{{? it.enLastName !== null}}it.enLastName{{?}}">
+    <input type="text" id="enFirstName" placeholder="名/FirstName" value="{{? it.enFirstName !== null}}it.enFirstName{{?}}">
+</div>
+<div class="input-group">
+    <label class="title-label" for="mobilePhone">手机号码</label>
+    <select>
+        <option>中国 (+86)</option>
+        <option>美国 (+0)</option>
+    </select>
+    <input type="text" id="mobilePhone" value="{{? it.mobilePhone !== null}}it.mobilePhone{{?}}">
+</div>
+<div class="input-group">
+    <label class="title-label" for="certType">证件类型</label>
+    <select>
+        <option value="" {{?it.type === '0'}}selected{{?}}>护照</option>
+        <option value="" {{?it.type === '1'}}selected{{?}}>身份证</option>
+    </select>
+    <input type="text" id="certType" value="{{? it.certType !== null}}it.certType{{?}}">
+</div>
+<div class="input-group">
+    <span class="title-label">旅客类型</span>
+    <input type="radio" id="vTypeAdult" name="visitorType" value="" {{?it.visitorType === '0'}}checked{{?}}><label class="radio-label" for="vTypeAdult">成人</label>
+    <input type="radio" id="vTypeChild" name="visitorType" value="" {{?it.visitorType === '1'}}checked{{?}}><label class="radio-label" for="vTypeChild">儿童</label>
+</div>
+<div class="input-group">
+    <span class="title-label">性别</span>
+    <input type="radio" id="genderMale" name="gender" value="" {{?it.gender === '0'}}checked{{?}}><label class="radio-label" for="genderMale">男</label>
+    <input type="radio" id="genderFemale" name="gender" value="" {{?it.gender === '1'}}checked{{?}}><label class="radio-label" for="genderFemale">女</label>
+</div>
+<div class="input-group">
+    <label class="title-label" for="bornDate">出生日期</label>
+    <input class="date-input" type="text" id="bornDate" value="{{? it.birth !== null}}it.birth{{?}}" readonly>
+</div>
+<div class="input-group">
+    <label class="title-label" for="email">Email</label>
+    <input type="text" id="email" value="{{? it.email !== null}}it.email{{?}}">
+</div>

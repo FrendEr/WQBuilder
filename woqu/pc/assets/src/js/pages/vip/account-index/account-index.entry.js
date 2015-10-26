@@ -16,7 +16,8 @@ var tempFn = doT.template(orderTemplate);
 /*
  * 初始化订单列表
  */
-$.post('http://127.0.0.1:3000', {
+var getOrderUrl = 'http://vip.woqu.com/get-order-list';
+$.post(getOrderUrl, {
     flag: 1,
     pageNo: 1,
     pageSize: 10

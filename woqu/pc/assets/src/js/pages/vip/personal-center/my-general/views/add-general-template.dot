@@ -1,0 +1,68 @@
+{{? it.length === 0 }}
+<p class="empty-tips">暂无联系人信息</p>
+{{?}}
+
+{{? it.length !== 0 }}
+<table class="gv-table">
+    <col width="80px">
+    <col width="100px">
+    <col width="150px">
+    <col width="100px">
+    <col width="70px">
+    <col width="150px">
+    <col width="150px">
+    <col width="140px">
+    <tr class="table-header">
+        <th><input type="checkbox" class="select-all">&nbsp;&nbsp;全选</th>
+        <th>中文名</th>
+        <th>英文名</th>
+        <th>旅客类型</th>
+        <th>性别</th>
+        <th>联系号码</th>
+        <th>护照号码</th>
+        <th>操作</th>
+    </tr>
+    {{~it:value:index}}
+        <tr>
+            <td>
+                <input type="checkbox" class="checkbox-li" data-id="{{=value.id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+            <td>{{=value.cnName}}</td>
+            <td>{{=value.enLastName}}</td>
+            <td>
+                {{? value.personType === 'aged'}}
+                老人
+                {{?? value.personType === 'adult'}}
+                成人
+                {{?? value.personType === 'child'}}
+                小孩
+                {{?}}
+            </td>
+            <td>
+                {{? value.gender === 1}}
+                男
+                {{??}}
+                女
+                {{?}}
+            </td>
+            <td>{{=value.mobile}}</td>
+            <td>
+                {{? value.certificateInfo === null}}
+                无
+                {{??}}
+                {{=value.certificateInfo}}
+                {{?}}
+            </td>
+            <td>
+                <a class="gv-edit-btn" href="#">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="gv-delete-btn" href="#" data-id="{{=value.id}}" data-uid="{{=value.uid}}">删除</a>
+            </td>
+        </tr>
+        {{? index !== it.length - 1}}
+            <tr class="order-divide">
+                <td colspan="8"></td>
+            </tr>
+        {{?}}
+    {{~}}
+</table>
+{{?}}

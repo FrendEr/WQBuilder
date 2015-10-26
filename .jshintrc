@@ -1,9 +1,9 @@
 {
     "boss":      true,
-    "undef":     true,
     "node":      true,
     "browser":   true,
     "lastsemic": true,
     "quotmark":  true,
-    "shadow":    true
+    "shadow":    true,
+    "esnext":    true
 }
